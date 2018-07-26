@@ -15,7 +15,7 @@ public class PhaseListenerFructus implements PhaseListener {
             System.out.println("antes da fase"+ getPhaseId());
             Session session = NovoHibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
-            FacesContextUtil.setRequestsession(session);
+            FacesContextUtil.setRequestSession(session);
             
         }
     }
@@ -24,7 +24,7 @@ public class PhaseListenerFructus implements PhaseListener {
     public void beforePhase(PhaseEvent pe) {
         System.out.println("depois da fase"+ getPhaseId());
         if (pe.getPhaseId().equals(PhaseId.RENDER_RESPONSE)){
-            Session session = FacesContextUtil.getRequestsession();
+            Session session = FacesContextUtil.getRequestSession();
             try {
                 session.getTransaction().commit();
             } catch (Exception e) {

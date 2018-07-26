@@ -2,10 +2,14 @@
 package br.fructus.model.entity;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -17,7 +21,10 @@ public class UniMed implements Serializable{
     @Column(name="Unidade",nullable=false)
     private String Unidade;
     @Column(name="descricao")
-    private String descricao ;   
+    private String descricao ; 
+    
+    @OneToMany(mappedBy = "Unidade", fetch = FetchType.LAZY)
+    private List<Graos> grao;
 
     public UniMed() {
     }
@@ -38,6 +45,15 @@ public class UniMed implements Serializable{
         this.descricao = descricao;
     }
 
+    public List<Graos> getGrao() {
+        return grao;
+    }
+
+    public void setGrao(List<Graos> grao) {
+        this.grao = grao;
+    }
+
+    
     @Override
     public int hashCode() {
         int hash = 5;
